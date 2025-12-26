@@ -1,0 +1,50 @@
+# === Stellar Mechs - Prototype ===
+
+class Mech:
+    def __init__(self, nome, vita, attacco):
+        self.nome = nome
+        self.vita = vita
+        self.attacco = attacco
+
+    def attacca(self, nemico):
+        nemico.vita -= self.attacco
+        print(f"{self.nome} attacca! Danni: {self.attacco}")
+
+class Pilota:
+    def __init__(self, nome, mech):
+        self.nome = nome
+        self.mech = mech
+
+class Pianeta:
+    def __init__(self, nome, pericolo):
+        self.nome = nome
+        self.pericolo = pericolo
+
+    def esplora(self):
+        print(f"Stai esplorando il pianeta {self.nome}")
+        print(f"Livello di pericolo: {self.pericolo}")
+
+# === CREAZIONE OGGETTI ===
+mech_giocatore = Mech("Ares-01", 100, 20)
+pilota = Pilota("Alex", mech_giocatore)
+
+pianeta_fuoco = Pianeta("Vulcan-X", "Alto")
+
+# === GIOCO ===
+print("🚀 Benvenuto in Stellar Mechs 🚀")
+pianeta_fuoco.esplora()
+
+nemico = Mech("Mech Pirata", 60, 15)
+
+while nemico.vita > 0 and pilota.mech.vita > 0:
+    pilota.mech.attacca(nemico)
+    print(f"Vita nemico: {nemico.vita}")
+
+    if nemico.vita > 0:
+        nemico.attacca(pilota.mech)
+        print(f"Vita tuo Mech: {pilota.mech.vita}")
+
+if pilota.mech.vita > 0:
+    print("🎉 Hai vinto il combattimento!")
+else:
+    print("💥 Il tuo Mech è stato distrutto...")
